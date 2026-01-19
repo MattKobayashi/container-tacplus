@@ -1,0 +1,2 @@
+#!/command/with-contenv sh
+/usr/local/sbin/tac_plus-ng -f $TACPLUS_CFG_FILE

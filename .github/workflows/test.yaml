@@ -1,0 +1,28 @@
+---
+jobs:
+  image:
+    name: Image
+    permissions:
+      contents: read
+    runs-on: ubuntu-24.04
+    steps:
+      # Checkout repository
+      # https://github.com/actions/checkout
+      - name: Checkout repository
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      # Build and start image
+      - name: Build and start image
+        run: |
+          docker compose up \
+            --build \
+            --attach=connection_test \
+            --exit-code-from=connection_test
+        working-directory: test
+name: Test
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+permissions:
+  contents: read
