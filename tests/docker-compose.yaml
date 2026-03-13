@@ -1,30 +1,30 @@
 ---
-name: tac_plus
+name: test
 services:
   ## Connection Test ##
   connection_test:
     command: >
       bash -c "apt-get update
       && apt-get install --no-install-recommends --yes netcat-openbsd
-      && nc -zv tac_plus 49"
+      && nc -zv app 49"
     container_name: connection_test
     depends_on:
-      - tac_plus
+      - app
     image: debian:trixie-slim
     networks:
-      - tac_plus
+      - test
     platform: linux/amd64
     restart: "no"
   ## tac_plus-ng ##
-  tac_plus:
+  app:
     build:
       context: ..
       dockerfile: Dockerfile
-    container_name: tac_plus
+    container_name: app
     environment:
       - "TACPLUS_CFG_FILE=/opt/tac_plus-ng.cfg"
     networks:
-      - tac_plus
+      - test
     platform: linux/amd64
     restart: unless-stopped
     volumes:
@@ -32,8 +32,8 @@ services:
         target: /opt/tac_plus-ng.cfg
         type: bind
 networks:
-  tac_plus:
-    name: tac_plus
+  test:
+    name: test
     driver: bridge
     enable_ipv6: true
     ipam:

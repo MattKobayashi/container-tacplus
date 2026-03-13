@@ -2,22 +2,8 @@
 jobs:
   image:
     name: Image
-    permissions:
-      contents: read
-    runs-on: ubuntu-24.04
-    steps:
-      # Checkout repository
-      # https://github.com/actions/checkout
-      - name: Checkout repository
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      # Build and start image
-      - name: Build and start image
-        run: |
-          docker compose up \
-            --build \
-            --attach=connection_test \
-            --exit-code-from=connection_test
-        working-directory: test
+    secrets: inherit
+    uses: MattKobayashi/actions-workflows/.github/workflows/test.yaml@686b2644a231ae70f253b9e1f63e978cddfecad5 # v1.4.1
 name: Test
 on:
   pull_request:
@@ -26,3 +12,4 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  pull-requests: write
