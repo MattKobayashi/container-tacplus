@@ -38,5 +38,5 @@ networks:
     enable_ipv6: true
     ipam:
       config:
-        - subnet: 10.42.0.0/24
-        - subnet: fdea:420:cafe::/64
+        - subnet: 10.53.0.0/24
+        - subnet: fdea:530:cafe::/64
