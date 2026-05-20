@@ -1,4 +1,4 @@
-FROM debian:trixie-slim@sha256:109e2c65005bf160609e4ba6acf7783752f8502ad218e298253428690b9eaa4b AS build
+FROM debian:trixie-slim@sha256:8d7a3dca57e62717b0f10897aca189da5d7acde3cc1ced657bdfd06ef5379576 AS build
 
 WORKDIR /opt/event-driven-servers
 
@@ -17,7 +17,7 @@ RUN curl -fsSLo event-driven-servers.tar.gz https://github.com/MarcJHuber/event-
     && make \
     && make install
 
-FROM debian:trixie-slim@sha256:109e2c65005bf160609e4ba6acf7783752f8502ad218e298253428690b9eaa4b AS s6overlay
+FROM debian:trixie-slim@sha256:8d7a3dca57e62717b0f10897aca189da5d7acde3cc1ced657bdfd06ef5379576 AS s6overlay
 
 # Dependencies
 RUN apt-get update \
@@ -40,7 +40,7 @@ RUN echo "$(cat s6-overlay-x86_64.tar.xz.sha256)" | sha256sum -c - \
     && tar -C / -Jxpf /tmp/s6-overlay-x86_64.tar.xz
 COPY s6-rc.d/ /etc/s6-overlay/s6-rc.d/
 
-FROM debian:trixie-slim@sha256:109e2c65005bf160609e4ba6acf7783752f8502ad218e298253428690b9eaa4b
+FROM debian:trixie-slim@sha256:8d7a3dca57e62717b0f10897aca189da5d7acde3cc1ced657bdfd06ef5379576
 
 # Environment variables
 ENV TACPLUS_CFG_FILE=/opt/tac_plus-ng.cfg
