@@ -4,7 +4,7 @@ jobs:
   image:
     name: Image
     secrets: inherit
-    uses: MattKobayashi/actions-workflows/.github/workflows/test.yaml@686b2644a231ae70f253b9e1f63e978cddfecad5 # v1.4.1
+    uses: MattKobayashi/actions-workflows/.github/workflows/test.yaml@223a5ec6fde0c6a731eb2c3713805337fa9a16be # v1.4.2
 name: Test
 on:
   pull_request:
